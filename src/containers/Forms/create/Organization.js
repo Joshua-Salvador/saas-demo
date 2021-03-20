@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import firebase from "firebase";
+import { db, auth } from "../../../firebase";
+import "../../../tailwind.css";
 
 function Organization() {
-  const db = firebase.firestore();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [admin, setAdmin] = useState({
@@ -39,6 +39,8 @@ function Organization() {
         admin,
       });
 
+      await auth.createUserWithEmailAndPassword(admin.email, admin.password);
+
       console.log(res.id);
     } catch (err) {
       console.error(err);
@@ -46,63 +48,75 @@ function Organization() {
   };
 
   return (
-    <div>
+    <div className="font-nunito rounded-md m-72 px-4 py-8 shadow text-left">
       <form onSubmit={handleSubmit}>
-        <label for="org-name">Organization Name</label>
-        <input
-          id="org-name"
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleOrgChange}
-        />{" "}
-        <br></br>
-        <label for="org-email">Organization Email</label>
-        <input
-          id="org-email"
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleOrgChange}
-        />{" "}
-        <br></br>
-        <label for="admin-name">Admin Name</label>
-        <input
-          id="admin-name"
-          type="text"
-          name="name"
-          value={admin.name}
-          onChange={handleAdminChange}
-        />{" "}
-        <br></br>
-        <label for="admin-email">Admin Email</label>
-        <input
-          id="admin-email"
-          type="email"
-          name="email"
-          value={admin.email}
-          onChange={handleAdminChange}
-        />{" "}
-        <br></br>
-        <label for="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          value={admin.password}
-          onChange={handleAdminChange}
-        />{" "}
-        <br></br>
-        <label for="confirm-password">Confirm Password</label>
-        <input
-          id="confirm-password"
-          type="password"
-          name="confirmPassword"
-          value={admin.confirmPassword}
-          onChange={handleAdminChange}
-        />{" "}
-        <br></br>
-        <input type="submit" />
+        <div className="container">
+          <div className="organization">
+            <div className="container my-8">
+              <h3 className="text-2xl font-semibold">Organization Name: </h3>
+              <input
+                onChange={handleOrgChange}
+                type="text"
+                name="name"
+                className="w-1/2 border-green-400 border-b-2 focus:outline-none"
+              />
+            </div>
+            <div className="container my-8">
+              <h3 className="text-2xl font-semibold">Organization Email: </h3>
+              <input
+                onChange={handleOrgChange}
+                type="email"
+                name="email"
+                className="w-1/2 border-green-400 border-b-2 focus:outline-none"
+              />
+            </div>
+          </div>
+          <div className="admin">
+            <div className="container my-8">
+              <h3 className="text-2xl font-semibold">Admin Name: </h3>
+              <input
+                onChange={handleAdminChange}
+                type="text"
+                name="name"
+                className="w-1/2 border-green-400 border-b-2 focus:outline-none"
+              />
+            </div>
+            <div className="container my-8">
+              <h3 className="text-2xl font-semibold">Admin Email: </h3>
+              <input
+                onChange={handleAdminChange}
+                type="email"
+                name="email"
+                className="w-1/2 border-green-400 border-b-2 focus:outline-none"
+              />
+            </div>
+            <div className="container my-8">
+              <h3 className="text-2xl font-semibold">Password: </h3>
+              <input
+                onChange={handleAdminChange}
+                type="password"
+                name="password"
+                className="w-1/2 border-green-400 border-b-2 focus:outline-none"
+              />
+            </div>
+            <div className="container my-8">
+              <h3 className="text-2xl font-semibold">Confirm Password: </h3>
+              <input
+                onChange={handleAdminChange}
+                type="password"
+                name="confirmPassword"
+                className="w-1/2 border-green-400 border-b-2 focus:outline-none"
+              />
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          className="px-8 py-1 text-gray-700 text-xl rounded-lg bg-green-300"
+        >
+          Create Organization
+        </button>
       </form>
     </div>
   );
