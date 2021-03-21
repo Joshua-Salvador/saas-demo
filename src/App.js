@@ -1,14 +1,19 @@
 import "./App.css";
+import Login from "./containers/Forms/auth/Login";
 import Asset from "./containers/Forms/create/Asset";
 import Organization from "./containers/Forms/create/Organization";
 import User from "./containers/Forms/create/User";
+import AuthProvider from "./contexts/AuthProvider";
 
 function App() {
   return (
     <div className="App">
-      <Organization />
-      <User />
-      <Asset />
+      <AuthProvider>
+        <Organization />
+        <Login />
+        <User />
+        <Asset />
+      </AuthProvider>
     </div>
   );
 }
