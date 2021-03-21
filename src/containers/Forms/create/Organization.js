@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { db, auth } from "../../../firebase";
+// import { db, auth } from "../../../firebase";
 import "../../../tailwind.css";
+import axios from '../../../axios'
 
 function Organization() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [admin, setAdmin] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -33,15 +34,22 @@ function Organization() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await db.collection(`organizations`).add({
+      // const res = await db.collection(`organizations`).add({
+      //   name,
+      //   email,
+      //   admin,
+      // });
+
+      // await auth.createUserWithEmailAndPassword(admin.email, admin.password);
+
+      // console.log(res.id);
+
+      axios.post('/organizations/', {
         name,
         email,
-        admin,
-      });
+        admin
+      })
 
-      await auth.createUserWithEmailAndPassword(admin.email, admin.password);
-
-      console.log(res.id);
     } catch (err) {
       console.error(err);
     }
@@ -56,6 +64,7 @@ function Organization() {
               <h3 className="text-2xl font-semibold">Organization Name: </h3>
               <input
                 onChange={handleOrgChange}
+                value={name}
                 type="text"
                 name="name"
                 className="w-1/2 border-green-400 border-b-2 focus:outline-none"
@@ -64,6 +73,7 @@ function Organization() {
             <div className="container my-8">
               <h3 className="text-2xl font-semibold">Organization Email: </h3>
               <input
+              value={email}
                 onChange={handleOrgChange}
                 type="email"
                 name="email"
@@ -75,15 +85,17 @@ function Organization() {
             <div className="container my-8">
               <h3 className="text-2xl font-semibold">Admin Name: </h3>
               <input
+              value={admin.username}
                 onChange={handleAdminChange}
                 type="text"
-                name="name"
+                name="username"
                 className="w-1/2 border-green-400 border-b-2 focus:outline-none"
               />
             </div>
             <div className="container my-8">
               <h3 className="text-2xl font-semibold">Admin Email: </h3>
               <input
+              value={admin.email}
                 onChange={handleAdminChange}
                 type="email"
                 name="email"
@@ -93,6 +105,7 @@ function Organization() {
             <div className="container my-8">
               <h3 className="text-2xl font-semibold">Password: </h3>
               <input
+              value={admin.password}
                 onChange={handleAdminChange}
                 type="password"
                 name="password"
@@ -102,6 +115,7 @@ function Organization() {
             <div className="container my-8">
               <h3 className="text-2xl font-semibold">Confirm Password: </h3>
               <input
+              value={admin.confirmPassword}
                 onChange={handleAdminChange}
                 type="password"
                 name="confirmPassword"
