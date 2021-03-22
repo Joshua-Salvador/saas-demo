@@ -18,10 +18,13 @@ function AuthProvider({ children }) {
   }
 
   function logout() {
+    localStorage.removeItem('token')
     return auth.signOut();
   }
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) 
+        user.getIdToken().then((token) => localStorage.setItem('token', token))
       console.log(user);
       setCurrentUser(user);
       setLoading(false);

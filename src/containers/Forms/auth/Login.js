@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../../tailwind.css";
-// import axios from "../../../axios";
+import axios from "../../../axios";
 import { useAuth } from "../../../contexts/AuthProvider";
 import { db } from "../../../firebase";
 
@@ -95,6 +95,7 @@ function Login() {
         >
           Get Test Data
         </button>
+        <button onClick={async() => console.log(await axios.get('/users/'))} className="px-8 py-1 ml-2 text-gray-700 text-xl rounded-lg bg-green-300">Function call</button>
       </form>
     </div>
   );

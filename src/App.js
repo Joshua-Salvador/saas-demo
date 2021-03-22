@@ -10,6 +10,7 @@ function App() {
     <div className="App">
       <AuthProvider>
         <Login />
+      
         <Organization />
         <User />
         <Asset />
