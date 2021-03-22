@@ -9,8 +9,8 @@ function App() {
   return (
     <div className="App">
       <AuthProvider>
-        <Organization />
         <Login />
+        <Organization />
         <User />
         <Asset />
       </AuthProvider>

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import "../../../tailwind.css";
-import axios from "../../../axios";
+// import axios from "../../../axios";
 import { useAuth } from "../../../contexts/AuthProvider";
+import { db } from "../../../firebase";
 
 function Login() {
-  const { login, currentUser } = useAuth();
+  const { login, currentUser, logout } = useAuth();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
-  const [user, setUser] = useState();
 
   const handleChange = (e) => {
     setCredentials((prevCredential) => ({
@@ -22,9 +22,30 @@ function Login() {
     e.preventDefault();
     try {
       const res = await login(credentials.email, credentials.password);
-      setUser(currentUser);
       console.log(currentUser);
       console.log(res);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      logout();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getTestData = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await db
+        .collection("organizations")
+        .doc("GMr7IRmNMzAjXRePEnq1")
+        .get();
+      console.log(res.data());
     } catch (err) {
       console.error(err);
     }
@@ -58,8 +79,21 @@ function Login() {
           type="submit"
           className="px-8 py-1 text-gray-700 text-xl rounded-lg bg-green-300"
         >
-          {JSON.stringify(user)}
           Login
+        </button>
+        {currentUser && (
+          <button
+            onClick={handleLogout}
+            className="px-8 py-1 ml-2 text-gray-700 text-xl rounded-lg bg-green-300"
+          >
+            Logout
+          </button>
+        )}
+        <button
+          onClick={getTestData}
+          className="px-8 py-1 ml-2 text-gray-700 text-xl rounded-lg bg-green-300"
+        >
+          Get Test Data
         </button>
       </form>
     </div>
