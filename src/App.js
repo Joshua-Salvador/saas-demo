@@ -5,6 +5,8 @@ import Organization from "./containers/Forms/create/Organization";
 import User from "./containers/Forms/create/User";
 import AuthProvider from "./contexts/AuthProvider";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
             <Route exact path="/register" component={Organization} />
             <Route exact path="/create-user" component={User} />
             <Route exact path="/create-asset" component={Asset} />
+            <ProtectedRoute exact path="/" component={Dashboard} />
           </Switch>
         </AuthProvider>
       </Router>
