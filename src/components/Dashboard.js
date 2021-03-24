@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import "../tailwind.css";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthProvider";
+import Profit from "../containers/Cards/Profit";
 
 function Dashboard() {
   const [data, setData] = useState();
-  const { logout, currentUser } = useAuth();
+  const { logout } = useAuth();
   useEffect(() => {
     async function fetchData() {
       try {
@@ -22,9 +23,10 @@ function Dashboard() {
     }
     fetchData();
   }, []);
+  console.log(data);
   return (
     <div>
-      {JSON.stringify(data)}
+      {/* {JSON.stringify(data)} */}
       <br></br>
       <button
         onClick={async () => await logout()}
@@ -33,7 +35,7 @@ function Dashboard() {
         Logout
       </button>
       <br></br>
-      {JSON.stringify(currentUser)}
+      <Profit />
     </div>
   );
 }

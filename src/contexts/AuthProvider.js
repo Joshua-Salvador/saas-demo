@@ -18,19 +18,32 @@ function AuthProvider({ children }) {
   }
 
   function logout() {
-    localStorage.removeItem('token')
+    localStorage.removeItem("token");
     return auth.signOut();
   }
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) 
-        user.getIdToken().then((token) => localStorage.setItem('token', token))
-      console.log(user);
-      setCurrentUser(user);
-      setLoading(false);
-    });
 
-    return unsubscribe;
+  useEffect(() => {
+    const unsubscribe = async () => {
+      auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          try {
+            const token = await auth.currentUser.getIdTokenResult();
+
+            setCurrentUser({
+              ...user.providerData[0],
+              ...token.claims,
+            });
+            setLoading(false);
+          } catch (err) {
+            console.error(err);
+          }
+        } else {
+          setCurrentUser(user);
+          setLoading(false);
+        }
+      });
+    };
+    return unsubscribe();
   }, []);
 
   const value = {

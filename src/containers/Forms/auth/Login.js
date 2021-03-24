@@ -3,8 +3,10 @@ import "../../../tailwind.css";
 import axios from "../../../axios";
 import { useAuth } from "../../../contexts/AuthProvider";
 import { db } from "../../../firebase";
+import { useHistory } from "react-router-dom";
 
 function Login() {
+  const history = useHistory();
   const { login, currentUser, logout } = useAuth();
   const [credentials, setCredentials] = useState({
     email: "",
@@ -24,6 +26,7 @@ function Login() {
       const res = await login(credentials.email, credentials.password);
       console.log(currentUser);
       console.log(res);
+      history.push("/");
     } catch (err) {
       console.error(err);
     }
@@ -95,7 +98,12 @@ function Login() {
         >
           Get Test Data
         </button>
-        <button onClick={async() => console.log(await axios.get('/users/'))} className="px-8 py-1 ml-2 text-gray-700 text-xl rounded-lg bg-green-300">Function call</button>
+        <button
+          onClick={async () => console.log(await axios.get("/users/"))}
+          className="px-8 py-1 ml-2 text-gray-700 text-xl rounded-lg bg-green-300"
+        >
+          Function call
+        </button>
       </form>
     </div>
   );
