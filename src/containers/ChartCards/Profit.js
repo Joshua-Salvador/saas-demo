@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../../firebase";
+// import { db } from "../../firebase";
+import { useProject } from "../../contexts/ProjectsProvider";
 import "../../tailwind.css";
 import {
   LineChart,
@@ -10,21 +11,12 @@ import {
   YAxis,
 } from "recharts";
 function Profit() {
-  const [data, setData] = useState([]);
+  const { projects } = useProject();
+  const [data, setData] = useState();
   useEffect(() => {
     async function fetchProjectData() {
       try {
-        const data = await db
-          .collection("organizations")
-          .doc("GMr7IRmNMzAjXRePEnq1")
-          .collection("projects")
-          .limit(10)
-          .orderBy("name")
-          .get();
-
-        data.forEach((project) => {
-          setData((prev) => [...prev, project.data()]);
-        });
+        setData(projects);
       } catch (err) {
         console.error(err);
       }

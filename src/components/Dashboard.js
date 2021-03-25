@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import "../tailwind.css";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthProvider";
-import Profit from "../containers/Cards/Profit";
+import ProjectsProvider from "../contexts/ProjectsProvider";
+import Profit from "../containers/ChartCards/Profit";
+import ProjectsLibrary from "./ProjectsLibrary";
 
 function Dashboard() {
   const [data, setData] = useState();
@@ -35,7 +37,10 @@ function Dashboard() {
         Logout
       </button>
       <br></br>
-      <Profit />
+      <ProjectsProvider>
+        <Profit />
+        <ProjectsLibrary />
+      </ProjectsProvider>
     </div>
   );
 }
