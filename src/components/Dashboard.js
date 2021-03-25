@@ -5,6 +5,8 @@ import { useAuth } from "../contexts/AuthProvider";
 import ProjectsProvider from "../contexts/ProjectsProvider";
 import Profit from "../containers/ChartCards/Profit";
 import ProjectsLibrary from "./ProjectsLibrary";
+import UsersProvider from "../contexts/UsersProvider";
+import Users from "./Users";
 
 function Dashboard() {
   const [data, setData] = useState();
@@ -37,10 +39,14 @@ function Dashboard() {
         Logout
       </button>
       <br></br>
+
       <ProjectsProvider>
         <Profit />
         <ProjectsLibrary />
       </ProjectsProvider>
+      <UsersProvider>
+        <Users />
+      </UsersProvider>
     </div>
   );
 }
