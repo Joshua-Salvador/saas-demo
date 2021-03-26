@@ -3,7 +3,7 @@ import "../../../tailwind.css";
 import axios from "../../../axios";
 import { useAuth } from "../../../contexts/AuthProvider";
 import { db } from "../../../firebase";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 function Login() {
   const history = useHistory();
@@ -53,7 +53,9 @@ function Login() {
       console.error(err);
     }
   };
-  return (
+  return currentUser ? (
+    <Redirect to="/" />
+  ) : (
     <div className="font-nunito rounded-md m-72 px-4 py-8 shadow text-left">
       <form onSubmit={submitLogin}>
         <div className="container">
