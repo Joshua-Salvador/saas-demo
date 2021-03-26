@@ -7,6 +7,10 @@ import AuthProvider from "./contexts/AuthProvider";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./components/Dashboard";
+import ProjectsLibrary from "./components/ProjectsLibrary";
+import ProjectsProvider from "./contexts/ProjectsProvider";
+import Users from "./components/Users";
+import UsersProvider from "./contexts/UsersProvider";
 
 function App() {
   return (
@@ -18,6 +22,19 @@ function App() {
             <Route exact path="/register" component={Organization} />
             <Route exact path="/create-user" component={User} />
             <Route exact path="/create-asset" component={Asset} />
+
+            <ProtectedRoute exact path="/users">
+              <UsersProvider>
+                <Users />
+              </UsersProvider>
+            </ProtectedRoute>
+
+            <ProtectedRoute exact path="/projects">
+              <ProjectsProvider>
+                <ProjectsLibrary />
+              </ProjectsProvider>
+            </ProtectedRoute>
+
             <ProtectedRoute exact path="/" component={Dashboard} />
           </Switch>
         </AuthProvider>

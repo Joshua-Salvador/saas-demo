@@ -4,9 +4,6 @@ import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthProvider";
 import ProjectsProvider from "../contexts/ProjectsProvider";
 import Profit from "../containers/ChartCards/Profit";
-import ProjectsLibrary from "./ProjectsLibrary";
-import UsersProvider from "../contexts/UsersProvider";
-import Users from "./Users";
 import CostSummary from "../containers/ChartCards/CostSummary";
 
 function Dashboard() {
@@ -31,8 +28,6 @@ function Dashboard() {
   console.log(data);
   return (
     <div>
-      {/* {JSON.stringify(data)} */}
-      <br></br>
       <button
         onClick={async () => await logout()}
         className="px-8 py-1 ml-2 text-gray-700 text-xl rounded-lg bg-green-300"
@@ -44,11 +39,7 @@ function Dashboard() {
       <ProjectsProvider>
         <Profit />
         <CostSummary />
-        <ProjectsLibrary />
       </ProjectsProvider>
-      <UsersProvider>
-        <Users />
-      </UsersProvider>
     </div>
   );
 }
