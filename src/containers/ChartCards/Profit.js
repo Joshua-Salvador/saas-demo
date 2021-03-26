@@ -9,6 +9,7 @@ import {
   Tooltip,
   XAxis,
   YAxis,
+  Legend,
 } from "recharts";
 function Profit() {
   const { projects } = useProject();
@@ -48,6 +49,7 @@ function Profit() {
         />
         <XAxis dataKey="name" tick={{ fontSize: 12 }} />
         <YAxis name="Revenue" tick={{ fontSize: 12 }} />
+        <Legend iconSize={12} />
       </LineChart>
     </div>
   );

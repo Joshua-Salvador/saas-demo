@@ -7,6 +7,7 @@ import Profit from "../containers/ChartCards/Profit";
 import ProjectsLibrary from "./ProjectsLibrary";
 import UsersProvider from "../contexts/UsersProvider";
 import Users from "./Users";
+import CostSummary from "../containers/ChartCards/CostSummary";
 
 function Dashboard() {
   const [data, setData] = useState();
@@ -42,6 +43,7 @@ function Dashboard() {
 
       <ProjectsProvider>
         <Profit />
+        <CostSummary />
         <ProjectsLibrary />
       </ProjectsProvider>
       <UsersProvider>
