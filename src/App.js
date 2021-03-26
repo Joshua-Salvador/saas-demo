@@ -11,6 +11,8 @@ import ProjectsLibrary from "./components/ProjectsLibrary";
 import ProjectsProvider from "./contexts/ProjectsProvider";
 import Users from "./components/Users";
 import UsersProvider from "./contexts/UsersProvider";
+import AssetProvider from "./contexts/AssetProvider";
+import AssetLibrary from "./components/AssetLibrary";
 
 function App() {
   return (
@@ -33,6 +35,12 @@ function App() {
               <ProjectsProvider>
                 <ProjectsLibrary />
               </ProjectsProvider>
+            </ProtectedRoute>
+
+            <ProtectedRoute exact path="/assets">
+              <AssetProvider>
+                <AssetLibrary />
+              </AssetProvider>
             </ProtectedRoute>
 
             <ProtectedRoute exact path="/" component={Dashboard} />
