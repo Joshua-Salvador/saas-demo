@@ -13,6 +13,8 @@ import Users from "./components/Users";
 import UsersProvider from "./contexts/UsersProvider";
 import AssetProvider from "./contexts/AssetProvider";
 import AssetLibrary from "./components/AssetLibrary";
+import TasksProvider from "./contexts/TasksProvider";
+import TasksLibrary from "./components/TasksLibrary";
 
 function App() {
   return (
@@ -41,6 +43,12 @@ function App() {
               <AssetProvider>
                 <AssetLibrary />
               </AssetProvider>
+            </ProtectedRoute>
+
+            <ProtectedRoute exact path="/tasks">
+              <TasksProvider>
+                <TasksLibrary />
+              </TasksProvider>
             </ProtectedRoute>
 
             <ProtectedRoute exact path="/" component={Dashboard} />

@@ -1,31 +1,47 @@
 import React, { useState, useEffect } from "react";
 import { useProject } from "../../contexts/ProjectsProvider";
 import "../../tailwind.css";
-import {
-  Radar,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  Tooltip,
-} from "recharts";
+import { Cell, Pie, PieChart, Tooltip } from "recharts";
 
 function CostSummary() {
   const { projects } = useProject();
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
+  const colors = ["#45d320", "#03c2fc"];
   useEffect(() => {
     async function fetchProjectData() {
       try {
-        setData(projects);
+        let sumOfTotalSalaries = 0,
+          sumOfTotalAssets = 0;
+        await projects.forEach((project) => {
+          console.log(
+            project.costs.totalSalary,
+            project.costs.totalAssets,
+            sumOfTotalSalaries,
+            sumOfTotalAssets
+          );
+          sumOfTotalSalaries = sumOfTotalSalaries + project.costs.totalSalary;
+          sumOfTotalAssets = sumOfTotalAssets + project.costs.totalAssets;
+        });
+        setData([
+          {
+            type: "Salary",
+            value: sumOfTotalSalaries,
+          },
+          {
+            type: "Assets",
+            value: sumOfTotalAssets,
+          },
+        ]);
       } catch (err) {
         console.error(err);
       }
     }
     fetchProjectData();
+    // eslint-disable-next-line
   }, []);
   return (
     <div className="text-center shadow-md">
-      <RadarChart
+      <PieChart
         cx={300}
         cy={250}
         outerRadius={150}
@@ -35,19 +51,27 @@ function CostSummary() {
         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       >
         <Tooltip />
-        <PolarGrid />
-        <PolarAngleAxis dataKey="name" fontSize={12} />
-        <PolarRadiusAxis />
-        <Radar
-          name="Costs"
-          dataKey="costs.totalCosts"
-          stroke="#8884d8"
-          fill="#8884d8"
-          fillOpacity={0.6}
-        />
-      </RadarChart>
+        <Pie data={data} dataKey="value" nameKey="type">
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={colors[index]} />
+          ))}
+        </Pie>
+      </PieChart>
     </div>
   );
 }
 
 export default CostSummary;
+
+/*
+
+{
+  type: "Salary",
+  cost: Number
+},
+{
+  type: "Assets",
+  cost: Number
+}
+
+*/
