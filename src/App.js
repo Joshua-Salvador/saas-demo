@@ -24,8 +24,8 @@ function App() {
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Organization} />
-            <Route exact path="/create-user" component={User} />
-            <Route exact path="/create-asset" component={Asset} />
+            <ProtectedRoute exact path="/create-user" component={User} />
+            <ProtectedRoute exact path="/create-asset" component={Asset} />
 
             <ProtectedRoute exact path="/users">
               <UsersProvider>
