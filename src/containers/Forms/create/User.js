@@ -7,9 +7,7 @@ function User() {
     username: "",
     email: "",
     branch: "",
-    position: "",
     salary: 0,
-    accessLevel: 1,
   });
   // const positionOptions =
   const changeHandler = (e) => {
@@ -57,16 +55,6 @@ function User() {
               type="text"
               name="branch"
               value={user.branch}
-              className="w-1/2 border-green-400 border-b-2 focus:outline-none"
-            />
-          </div>
-          <div className="container my-8">
-            <h3 className="text-2xl font-semibold">Position: </h3>
-            <input
-              onChange={changeHandler}
-              type="text"
-              name="position"
-              value={user.position}
               className="w-1/2 border-green-400 border-b-2 focus:outline-none"
             />
           </div>
