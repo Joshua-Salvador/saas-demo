@@ -16,6 +16,8 @@ import TasksProvider from "./contexts/TasksProvider";
 import TasksLibrary from "./components/TasksLibrary";
 import User from "./containers/Forms/create/User";
 import Asset from "./containers/Forms/create/Asset";
+import Admin from "./containers/Forms/create/Admin";
+import Branch from "./containers/Forms/create/Branch";
 
 function Home() {
   const { path } = useRouteMatch();
@@ -24,6 +26,16 @@ function Home() {
       <Router>
         <Switch>
           <ProtectedRoute exact path={path} component={Dashboard} />
+          <ProtectedRoute
+            exact
+            path={`${path}/create-admin`}
+            component={Admin}
+          />
+          <ProtectedRoute
+            exact
+            path={`${path}/create-branch`}
+            component={Branch}
+          />
           <ProtectedRoute exact path={`${path}/create-user`} component={User} />
           <ProtectedRoute
             exact
