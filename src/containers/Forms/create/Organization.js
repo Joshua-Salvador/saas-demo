@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import { db, auth } from "../../../firebase";
 import "../../../tailwind.css";
-import axios from '../../../axios'
+import axios from "../../../axios";
 
 function Organization() {
   const [name, setName] = useState("");
@@ -11,6 +11,7 @@ function Organization() {
     email: "",
     password: "",
     confirmPassword: "",
+    salary: 0,
   });
 
   const handleOrgChange = (e) => {
@@ -44,12 +45,11 @@ function Organization() {
 
       // console.log(res.id);
 
-      axios.post('/organizations/', {
+      axios.post("/organizations/", {
         name,
         email,
-        admin
-      })
-
+        admin,
+      });
     } catch (err) {
       console.error(err);
     }
@@ -73,7 +73,7 @@ function Organization() {
             <div className="container my-8">
               <h3 className="text-2xl font-semibold">Organization Email: </h3>
               <input
-              value={email}
+                value={email}
                 onChange={handleOrgChange}
                 type="email"
                 name="email"
@@ -85,7 +85,7 @@ function Organization() {
             <div className="container my-8">
               <h3 className="text-2xl font-semibold">Admin Name: </h3>
               <input
-              value={admin.username}
+                value={admin.username}
                 onChange={handleAdminChange}
                 type="text"
                 name="username"
@@ -95,7 +95,7 @@ function Organization() {
             <div className="container my-8">
               <h3 className="text-2xl font-semibold">Admin Email: </h3>
               <input
-              value={admin.email}
+                value={admin.email}
                 onChange={handleAdminChange}
                 type="email"
                 name="email"
@@ -105,7 +105,7 @@ function Organization() {
             <div className="container my-8">
               <h3 className="text-2xl font-semibold">Password: </h3>
               <input
-              value={admin.password}
+                value={admin.password}
                 onChange={handleAdminChange}
                 type="password"
                 name="password"
@@ -115,10 +115,21 @@ function Organization() {
             <div className="container my-8">
               <h3 className="text-2xl font-semibold">Confirm Password: </h3>
               <input
-              value={admin.confirmPassword}
+                value={admin.confirmPassword}
                 onChange={handleAdminChange}
                 type="password"
                 name="confirmPassword"
+                className="w-1/2 border-green-400 border-b-2 focus:outline-none"
+              />
+            </div>
+            <div className="container my-8">
+              <h3 className="text-2xl font-semibold">Monthly Salary: </h3>
+              <input
+                onChange={handleAdminChange}
+                type="number"
+                min={0}
+                name="salary"
+                value={admin.salary}
                 className="w-1/2 border-green-400 border-b-2 focus:outline-none"
               />
             </div>
