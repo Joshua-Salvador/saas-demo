@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 import { db } from "../firebase";
+import { useAuth } from "./AuthProvider";
 
 const UserContext = createContext();
 
@@ -8,12 +9,13 @@ export const useUser = () => useContext(UserContext);
 function UsersProvider({ children }) {
   const [users, setUsers] = useState();
   const [loading, setLoading] = useState(true);
+  const { currentUser } = useAuth();
 
   async function getUsers() {
     try {
       const data = await db
         .collection("organizations")
-        .doc("GMr7IRmNMzAjXRePEnq1") // Eventually Replace with user's organization claims from Auth Provider
+        .doc(currentUser.organization)
         .collection("users")
         .get();
 
@@ -29,7 +31,7 @@ function UsersProvider({ children }) {
   useEffect(() => {
     const unsubscribe = db
       .collection("organizations")
-      .doc("GMr7IRmNMzAjXRePEnq1") // Eventually Replace with user's organization claims from Auth Provider
+      .doc(currentUser.organization)
       .collection("users")
       .onSnapshot((querySnapshot) => {
         const usersData = [];

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 import { db } from "../firebase";
+import { useAuth } from "./AuthProvider";
 
 const AssetContext = createContext();
 
@@ -8,7 +9,7 @@ export const useAsset = () => useContext(AssetContext);
 function AssetProvider({ children }) {
   const [assets, setAssets] = useState();
   const [loading, setLoading] = useState(true);
-
+  const { currentUser } = useAuth();
   // async function getAssets() {
   //   try {
   //     const data = await db
@@ -29,7 +30,7 @@ function AssetProvider({ children }) {
   useEffect(() => {
     const unsubscribe = db
       .collection("organizations")
-      .doc("GMr7IRmNMzAjXRePEnq1") // Eventually Replace with user's organization claims from Auth Provider
+      .doc(currentUser.organization)
       .collection("assets")
       .onSnapshot((querySnapshot) => {
         const assetsData = [];

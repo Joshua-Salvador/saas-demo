@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 import { db } from "../firebase";
+import { useAuth } from "./AuthProvider";
 
 const ProjectsContext = createContext();
 
@@ -9,11 +10,13 @@ function ProjectsProvider({ children }) {
   const [projects, setProjects] = useState();
   const [loading, setLoading] = useState(true);
 
+  const { currentUser } = useAuth();
+
   async function getProjects() {
     try {
       const data = await db
         .collection("organizations")
-        .doc("GMr7IRmNMzAjXRePEnq1") // Eventually Replace with user's organization claims from Auth Provider
+        .doc(currentUser.organization)
         .collection("projects")
         .limit(10)
         .orderBy("name")
@@ -31,7 +34,7 @@ function ProjectsProvider({ children }) {
   useEffect(() => {
     const unsubscribe = db
       .collection("organizations")
-      .doc("GMr7IRmNMzAjXRePEnq1") // Eventually Replace with user's organization claims from Auth Provider
+      .doc(currentUser.organization)
       .collection("projects")
       .onSnapshot((querySnapshot) => {
         const projectsData = [];
