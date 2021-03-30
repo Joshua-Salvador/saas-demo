@@ -27,6 +27,8 @@ function AuthProvider({ children }) {
       auth.onAuthStateChanged(async (user) => {
         if (user) {
           try {
+            const tokenToStore = await auth.currentUser.getIdToken();
+            localStorage.setItem("token", tokenToStore);
             const token = await auth.currentUser.getIdTokenResult();
 
             setCurrentUser({

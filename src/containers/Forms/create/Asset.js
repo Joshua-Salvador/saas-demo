@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../../tailwind.css";
+import axios from "../../../axios";
 function Asset() {
   const [asset, setAsset] = useState({
     name: "",
@@ -21,9 +22,18 @@ function Asset() {
         }));
     }
   };
+  const createAsset = async (e) => {
+    try {
+      e.preventDefault();
+      const res = await axios.post("/assets/", asset);
+      console.log(res);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <div className="font-nunito rounded-md m-72 px-4 py-8 shadow text-left">
-      <form>
+      <form onSubmit={createAsset}>
         <div className="container">
           <div className="container my-8">
             <h3 className="text-2xl font-semibold">Name: </h3>

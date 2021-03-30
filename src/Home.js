@@ -20,50 +20,41 @@ import Admin from "./containers/Forms/create/Admin";
 import Branch from "./containers/Forms/create/Branch";
 
 function Home() {
-  const { path } = useRouteMatch();
+  const { path, url } = useRouteMatch();
+  console.log(path, url);
   return (
     <div>
-      <Router>
-        <Switch>
-          <ProtectedRoute exact path={path} component={Dashboard} />
-          <ProtectedRoute
-            exact
-            path={`${path}/create-admin`}
-            component={Admin}
-          />
-          <ProtectedRoute
-            exact
-            path={`${path}/create-branch`}
-            component={Branch}
-          />
-          <ProtectedRoute exact path={`${path}/create-user`} component={User} />
-          <ProtectedRoute
-            exact
-            path={`${path}/create-asset`}
-            component={Asset}
-          />
+      <Switch>
+        {/* <ProtectedRoute exact path={`${path}/create-admin`} component={Admin} />
+        <ProtectedRoute
+          exact
+          path={`${path}/create-branch`}
+          component={Branch}
+        />
+        <ProtectedRoute exact path={`${path}/create-user`} component={User} />
+        <ProtectedRoute exact path={`${path}/create-asset`} component={Asset} />
+        <UsersProvider>
           <ProtectedRoute exact path={`${path}/users`}>
-            <UsersProvider>
-              <Users />
-            </UsersProvider>
+            <Users />
           </ProtectedRoute>
-          <ProtectedRoute exact path={`${path}/projects`}>
-            <ProjectsProvider>
-              <ProjectsLibrary />
-            </ProjectsProvider>
-          </ProtectedRoute>
-          <ProtectedRoute exact path={`${path}/assets`}>
-            <AssetProvider>
-              <AssetLibrary />
-            </AssetProvider>
-          </ProtectedRoute>
-          <ProtectedRoute exact path={`${path}/tasks`}>
-            <TasksProvider>
-              <TasksLibrary />
-            </TasksProvider>
-          </ProtectedRoute>
-        </Switch>
-      </Router>
+        </UsersProvider>
+        <ProtectedRoute exact path={`${path}/projects`}>
+          <ProjectsProvider>
+            <ProjectsLibrary />
+          </ProjectsProvider>
+        </ProtectedRoute>
+        <ProtectedRoute exact path={`${path}/assets`}>
+          <AssetProvider>
+            <AssetLibrary />
+          </AssetProvider>
+        </ProtectedRoute>
+        <ProtectedRoute exact path={`${path}/tasks`}>
+          <TasksProvider>
+            <TasksLibrary />
+          </TasksProvider>
+        </ProtectedRoute>
+        <ProtectedRoute exact path={path} component={Dashboard} /> */}
+      </Switch>
     </div>
   );
 }

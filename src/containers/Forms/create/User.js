@@ -16,7 +16,8 @@ function User() {
       [e.target.name]: e.target.value,
     }));
   };
-  const addUser = async () => {
+  const addUser = async (e) => {
+    e.preventDefault();
     try {
       const res = await axios.post("/users/adduser", user);
       console.log(res);

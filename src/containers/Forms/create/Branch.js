@@ -70,6 +70,12 @@ function Branch() {
             />
           </div>
         </div>
+        <button
+          type="submit"
+          className="px-8 py-1 text-gray-700 text-xl rounded-lg bg-green-300"
+        >
+          Add Branch
+        </button>
       </form>
     </div>
   );

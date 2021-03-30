@@ -59,6 +59,12 @@ function Admin() {
             />
           </div>
         </div>
+        <button
+          type="submit"
+          className="px-8 py-1 text-gray-700 text-xl rounded-lg bg-green-300"
+        >
+          Add Admin
+        </button>
       </form>
     </div>
   );

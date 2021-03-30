@@ -12,7 +12,14 @@ function Project() {
     <div className="font-nunito rounded-md m-72 px-4 py-8 shadow text-left">
       <form>
         <div className="container">
-          <div className="container my-8"></div>
+          <div className="container my-8">
+            <h1>Create a Project</h1>
+            <select name="branch">
+              <option value="Branch 1">Branch 1</option>
+              <option value="Branch 2">Branch 2</option>
+              <option value="Branch 3">Branch 3</option>
+            </select>
+          </div>
         </div>
       </form>
     </div>
