@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../tailwind.css";
 import axios from "../../../axios";
 import { useAuth } from "../../../contexts/AuthProvider";
@@ -12,6 +12,17 @@ function Login() {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    // eslint-disable-next-line no-restricted-globals
+    if (location.hostname === "localhost") {
+      setCredentials({
+        email: "testadmin@test.com",
+        password: "123456",
+      });
+    }
+    //eslint-disable-next-line
+  }, []);
 
   const handleChange = (e) => {
     setCredentials((prevCredential) => ({

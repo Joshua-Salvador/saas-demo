@@ -23,6 +23,7 @@ function Profit() {
       }
     }
     fetchProjectData();
+    //eslint-disable-next-line
   }, []);
   console.log(data);
   return (
