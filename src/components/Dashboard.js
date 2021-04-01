@@ -5,6 +5,8 @@ import { useAuth } from "../contexts/AuthProvider";
 import ProjectsProvider from "../contexts/ProjectsProvider";
 import Profit from "../containers/ChartCards/Profit";
 import CostSummary from "../containers/ChartCards/CostSummary";
+import AverageProfitMargin from "../containers/ChartCards/AverageProfitMargin";
+import MeanProfitForCompleted from "../containers/ChartCards/MeanProfitForCompleted";
 
 function Dashboard() {
   const [data, setData] = useState();
@@ -27,10 +29,10 @@ function Dashboard() {
   }, []);
   console.log(data);
   return (
-    <div>
+    <div className="bg-gray-50">
       <button
         onClick={async () => await logout()}
-        className="px-8 py-1 ml-2 text-gray-700 text-xl rounded-lg bg-green-300"
+        className="px-8 py-1 ml-2 text-white text-xl rounded-sm bg-blue-900"
       >
         Logout
       </button>
@@ -39,6 +41,8 @@ function Dashboard() {
       <ProjectsProvider>
         <Profit />
         <CostSummary />
+        <AverageProfitMargin />
+        <MeanProfitForCompleted />
       </ProjectsProvider>
     </div>
   );

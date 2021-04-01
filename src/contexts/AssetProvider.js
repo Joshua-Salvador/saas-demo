@@ -41,6 +41,7 @@ function AssetProvider({ children }) {
         setLoading(false);
       });
     return unsubscribe;
+    // eslint-disable-next-line
   }, []);
 
   const value = {

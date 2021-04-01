@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { db, auth } from "../../../firebase";
 import "../../../tailwind.css";
 import axios from "../../../axios";
@@ -13,6 +13,22 @@ function Organization() {
     confirmPassword: "",
     salary: 0,
   });
+
+  useEffect(() => {
+    // eslint-disable-next-line no-restricted-globals
+    if (location.hostname === "localhost") {
+      setName("Test");
+      setEmail("test@test.com");
+      setAdmin({
+        username: "Test Admin",
+        email: "testadmin@test.com",
+        password: "123456",
+        confirmPassword: "123456",
+        salary: 150000,
+      });
+    }
+    //eslint-disable-next-line
+  }, []);
 
   const handleOrgChange = (e) => {
     switch (e.target.name) {

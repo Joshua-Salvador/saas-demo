@@ -40,7 +40,7 @@ function CostSummary() {
     // eslint-disable-next-line
   }, []);
   return (
-    <div className="text-center shadow-md">
+    <div className="bg-white text-center shadow-md max-w-3xl mx-auto my-10">
       <PieChart
         cx={300}
         cy={250}
@@ -48,10 +48,15 @@ function CostSummary() {
         width={500}
         height={500}
         data={data}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        margin={{ top: 5, right: 30, left: 30, bottom: 5 }}
       >
         <Tooltip />
-        <Pie data={data} dataKey="value" nameKey="type">
+        <Pie
+          data={data}
+          dataKey="value"
+          nameKey="type"
+          label={(entry) => entry.type}
+        >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={colors[index]} />
           ))}

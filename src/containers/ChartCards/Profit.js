@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useProject } from "../../contexts/ProjectsProvider";
 import "../../tailwind.css";
 import {
-  LineChart,
-  Line,
+  BarChart,
+  Bar,
   CartesianGrid,
   Tooltip,
   XAxis,
@@ -26,8 +26,11 @@ function Profit() {
   }, []);
   console.log(data);
   return (
-    <div className="text-center ml-10">
-      <LineChart
+    <div className="bg-white font-nunito text-center shadow-md max-w-7xl mx-auto my-10 py-2">
+      <h1 className="text-4xl font-semibold underline my-4">
+        Revenues vs Costs
+      </h1>
+      <BarChart
         width={1200}
         height={400}
         data={data}
@@ -35,22 +38,28 @@ function Profit() {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <Tooltip />
-        <Line
+        <Bar
           name="Revenue"
           dataKey={"revenue"}
           type={"monotone"}
-          stroke="#45d320"
+          fill="#45d320"
         />
-        <Line
+        <Bar
           name="Total Costs"
           dataKey={"costs.totalCosts"}
           type={"monotone"}
-          stroke="#d34520"
+          fill="#d34520"
         />
         <XAxis dataKey="name" tick={{ fontSize: 12 }} />
         <YAxis name="Revenue" tick={{ fontSize: 12 }} />
-        <Legend iconSize={12} />
-      </LineChart>
+        <Legend
+          iconSize={12}
+          verticalAlign="top"
+          layout="horizontal"
+          align="center"
+          wrapperStyle={{ paddingTop: 4 }}
+        />
+      </BarChart>
     </div>
   );
 }
